@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户注册</title>
+<title>用户登录页面</title>
 <meta content="charset='utf-8'" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,24 +25,26 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=path%>/jsps/css/user/regist.css">
+	href="<%=path%>/jsps/css/user/login.css">
 
 
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="registBox">
+	<div class="container">
+	<div class="box">
+		   
+		  <div class="registBox">
 			<!--面板-->
 			<div class="panel  panel-info">
 				<!--标题-->
-				<div class="panel-heading text-success">用户注册</div>
+				<div class="panel-heading text-success">用户登录</div>
 				<!--主体-->
 				<div class="panel-body">
 				
-					<form class="form-horizontal" method="post" action="#" id="registForm">
+					<form class="form-horizontal" method="post" action="#" id="loginForm">
 					<!-- 发送参数的隐藏的input -->
-					<input type="hidden" name="method" value='regist'>
+					<input type="hidden" name="method" value='#'>
 					
 						<!--用户名输入-->
 						<div class="form-group">
@@ -75,36 +77,7 @@
 								</p>
 							</div>
 						</div>
-						<!--密码确认-->
-						<div class="form-group">
-							<label for="reloginpassword" class="col-sm-2 control-label">确认密码：</label>
-							<div class="col-sm-6">
-								<input type="password" class="form-control" id="reloginpassword" name="reloginpassword"
-									placeholder="请确认密码"  value="">
-							</div>
-							<div class="col-sm-4">
-								<p class="bg-danger text-muted errorMsg">
-								<span class='glyphicon glyphicon-remove'></span> 
-								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="reloginpasswordError"></span>
-								</p>
-							</div>
-						</div>
-						<!--邮箱-->
-						<div class="form-group">
-							<label for="Email" class="col-sm-2 control-label">邮箱：</label>
-							<div class="col-sm-6">
-								<input type="email" class="form-control" id="Email" name="Email"
-									placeholder="请输入邮箱"  value="">
-							</div>
-							<div class="col-sm-4">
-								<p class="bg-danger text-muted errorMsg">
-								<span class='glyphicon glyphicon-remove'></span> 
-								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="EmailError"></span>
-								</p>
-							</div>
-						</div>
+						
 						<!--验证码输入框-->
 						<div class="form-group">
 							<label for="VerificationCode" class="col-sm-2 control-label">验证码：</label>
@@ -131,10 +104,18 @@
 								<a href="javascript:changeImg();" class="btn btn-info">换一张</a><!-- 换码按钮 -->
 							</div>
 						</div>
-						<!--注册按钮-->
+						<!--登录按钮-->
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-6">
-								<button type="submit" class="btn btn-success btn-block">注册</button>
+								<button type="submit" class="btn btn-success btn-block">登录</button>
+							</div>
+						</div>
+						<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-4">
+								还没账号？
+							</div>
+							<div class="col-sm-6">
+								<button type="submit" class="btn btn-default ">注册</button>
 							</div>
 						</div>
 					</form>
@@ -144,10 +125,12 @@
 			</div>
 		</div>
 		<!--registBox-->
+		</div>
+		
 	</div>
 	<!--js-->
 	<script src="<%=path%>/vendor/bootstrap/js/jquery.js"></script>
 	<script src="<%=path%>/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<%=path%>/jsps/js/user/regist.js"></script>
+	<script src="<%=path%>/jsps/js/user/login.js"></script>
 </body>
 </html>

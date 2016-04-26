@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+body,html{
+  margin:0;padding:0;
+  font-family: 'Microsoft Yahei';
+  font-size:16px;
+  color:#5FBCF7; 
+  position:relative;
+  background:#fff;
+  width:100%;height:100%;
+}
+.box{
+  width:100%;height:500px;
+  background:#5FBCF7 url("../../../images/login_bg.jpg") no-repeat;
+  background-size:cover;
+  position:absolute;
+  top:50%;left:50%;
+  margin-top:-250px;
+  margin-left:-50%;
+}
+.box h1{
+  font-size: 25px;
+  position:absolute;
+  top:-50px;left:5%;
+  min-width: 400px;
+}
+
+.registBox{
+	width:650px;
+	position:absolute;
+	top:50%;left:10%;
+	/* margin-left:-300px; */
+	margin-top:-180px;
+}
+.errorMsg{
+	width:auto;
+	line-height:33px;
+	color:red;
+	padding-left:10px;
+}

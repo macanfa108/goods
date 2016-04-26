@@ -1,1 +1,21 @@
 @CHARSET "UTF-8";
+body{
+	font-famliy:"Mircrosoft Yahei";
+	font-size:16px;
+	background:#D9EDF7;
+	position:relative;
+}
+/* 注册容器，固定宽度 */
+.registBox{
+	width:700px;
+	position:absolute;
+	top:50%;left:50%;
+	margin-top:-243px;
+	margin-left:-350px;
+}
+.errorMsg{
+	width:auto;
+	line-height:33px;
+	color:red;
+	padding-left:10px;
+}
