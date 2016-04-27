@@ -1,4 +1,4 @@
-package com.jking.goods.user.domin;
+package com.jking.goods.user.domain;
 
 /**
  * 用户模块实体类
