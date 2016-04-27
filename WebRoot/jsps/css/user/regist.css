@@ -3,11 +3,11 @@ body{
 	font-famliy:"Mircrosoft Yahei";
 	font-size:16px;
 	background:#D9EDF7;
-	position:relative;
 }
 /* 注册容器，固定宽度 */
 .registBox{
 	width:700px;
+	height:auto;
 	position:absolute;
 	top:50%;left:50%;
 	margin-top:-243px;

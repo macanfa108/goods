@@ -48,8 +48,8 @@
 		</div>
 		<div class="panel-footer">
 		<div class="center-block">
-				 <a href="#" class="btn btn-success btn-lg" role="button">马上登录</a>
-				 <a href="#" class="btn btn-primary btn-lg" role="button">回到首页</a>
+				 <a href="<%=path %>/jsps/user/login.jsp" class="btn btn-success btn-lg" role="button">马上登录</a>
+				 <a href="<%=path %>/jsps/body.jsp" class="btn btn-primary btn-lg" role="button">回到首页</a>
 			</div>
 		</div>
 	</div>

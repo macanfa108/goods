@@ -112,10 +112,10 @@
 						</div>
 						<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-4">
-								还没账号？
+								还没账号？赶紧去注册~
 							</div>
 							<div class="col-sm-6">
-								<button type="submit" class="btn btn-default ">注册</button>
+								<a href="<%=path %>/jsps/user/regist.jsp" type="button" class="btn btn-default ">注册</a>
 							</div>
 						</div>
 					</form>
