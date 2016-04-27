@@ -124,7 +124,8 @@
 						<div class="form-group">
 							<div class="col-sm-6 col-sm-offset-2">
 								<div class="thumbnail">
-									<img src="../logo.png"/ id="imgVerifyCode"><!-- 验证码图片 -->
+								<!-- 后台返回的图片 -->
+									<img src="/goods/VerifyCodeServlet" id="imgVerifyCode" /><!-- 验证码图片 -->
 								</div>
 							</div>
 							<div class="col-sm-4">
