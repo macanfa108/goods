@@ -1,3 +1,4 @@
+
 package com.jking.goods.user.domin;
 
 /**
