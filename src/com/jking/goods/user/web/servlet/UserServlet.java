@@ -56,10 +56,8 @@ public class UserServlet extends BaseServlet {
 		userMap.put("verifyCode", verifyCode);
 
 		User formUser = CommonUtils.toBean(userMap, User.class);
+		
 		// 检验
-
-		System.out.print(formUser);
-
 		Map<String, String> errors = validateRegist(formUser, req.getSession());
 
 		if (errors.size() > 0) {
@@ -282,7 +280,7 @@ public class UserServlet extends BaseServlet {
 		// 校验数据的合理性
 		Map<String, String> loginerrors = validateLogin(formUser,
 				req.getSession());
-		System.out.println("loginerrors" + loginerrors.size());
+		 
 		if (loginerrors.size() > 0) {
 			req.setAttribute("user", formUser);
 			req.setAttribute("loginerrors", loginerrors);
