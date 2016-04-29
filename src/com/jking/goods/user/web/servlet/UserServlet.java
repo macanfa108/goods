@@ -2,7 +2,6 @@ package com.jking.goods.user.web.servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +65,6 @@ public class UserServlet extends BaseServlet {
 		if (errors.size() > 0) {
 			req.setAttribute("form", formUser);
 			req.setAttribute("errors", errors);
-			System.out.println("失败");
 			return "f:/jsps/user/regist.jsp";
 		}
 
@@ -189,10 +187,8 @@ public class UserServlet extends BaseServlet {
 			HttpServletResponse resp) throws ServletException, IOException {
 		// 获取用户名
 		String loginname = req.getParameter("loginname");
-		System.out.println("loginname" + loginname);
 		boolean flag = userService.ajaxValidateLoginname(loginname);
 		resp.getWriter().print(flag);
-		System.out.println(flag);
 		return null;
 
 	}

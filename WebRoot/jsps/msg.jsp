@@ -44,7 +44,7 @@
 	<div class="panel panel-primary statusPanel">
 		<div class="panel-heading">用户激活状态</div>
 		<div class="panel-body">
-			<h1 class="text-primary">恭喜你，激活成功，请马上登录!</h1>
+			<h1 class="text-primary">${msg}</h1>
 		</div>
 		<div class="panel-footer">
 		<div class="center-block">
