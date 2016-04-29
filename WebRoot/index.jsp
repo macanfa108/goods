@@ -27,16 +27,7 @@
 
 </head>
 <body>
-	<ul class="list-group">
-
-		<li class="list-group-item">地址45690</li>
-
-
-		<li class="list-group-item">Dapibus ac facilisis in</li>
-		
-		<li class="list-group-item">Porta ac consectetur ac</li>
-		<li class="list-group-item">Vestibulum at eros</li>
-		nosnowinwinter@gmail.com2
-	</ul>
+<!-- 转发到main.jsp图书商城首页 -->
+	<jsp:forward page="/jsps/main.jsp"></jsp:forward>
 </body>
 </html>

@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.height_20{
+	clear:both;
+	height:20px;
+}
+#leftPart{
+	width:180px; 
+	height:360px;;
+	 margin-top: 16px;
+	/* border:1px solid red; */
+	float:left;
+}
+#rightPart{
+	
+	/* width:180px; */
+	 /* margin-top: -16px; */
+/* 	border:1px solid red; */
+	float:right;
+	/* margin-left:60px; */
+	
+}

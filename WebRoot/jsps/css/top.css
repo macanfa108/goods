@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+/* 灰色导航条 */
+.containerColor {
+     font-size: 12px;
+	color: #999999;
+
+	background: #F2F2F2;
+	height: 36px;
+	line-height: 36px;
+}
+
+.containerColor   .nav>li>a {
+	padding: 10px;
+	/* border:1px solid red; */
+	color: #999999;
+}
+
+.containerColor   .nav>li>a:not (.name ):hover {
+	color: #C40000;
+}
+
+.containerColor  .navbar-nav>li>a {
+	line-height: 14px;
+}
+
+.containerColor .glyphicon {
+	line-height: 14px;
+}
+/* 搜索框部分 */
+.searchPart{
+	height:85px;
+	line-height:85px;
+	background:#207BD9;
+
+}
+
+.searchPart .logoBox{
+	margin:10px auto;
+}
