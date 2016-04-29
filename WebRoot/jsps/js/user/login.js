@@ -130,11 +130,11 @@ function validateVerificationCode(){
 	}
 	//是否验证码正确
 	 $.ajax({
-		url:"#",//调用的servlet
-		data:{
-			method:"#",//调用方法名
-			VerificationCode:value
-		},
+			url:"/goods/UserServlet",//调用的servlet
+			data:{
+				method:"ajaxValidateVerifyCode",//调用方法名
+				VerificationCode:value
+			},
 		type:'post',
 		dataType:'json',
 		async:false,//异步加载

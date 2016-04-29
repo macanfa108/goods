@@ -94,9 +94,9 @@ function validateLoginName(){
 	}
 //	是否已经注册
 	$.ajax({
-		url:"#",//调用的servlet
+		url:"/goods/UserServlet",//调用的servlet
 		data:{
-			method:"#",//调用方法名
+			method:"ajaxValidateLoginname",//调用方法名
 			loginname:value
 		},
 		type:'post',
@@ -157,36 +157,33 @@ function validateReloginpassword(){
 function validateEmail(){
 	var id='Email';
 	var value=$("#"+id).val();
-	
 	 var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	 if (filter.test(value)){
+		//是否注册校验
+		 $.ajax({
+		    url:"/goods/UserServlet",
+			data:{
+				method:"ajaxValidateEmail",//调用方法名
+				email:value
+			},
+			type:'post',
+			dataType:'json',
+			async:false,//异步加载
+			cache:false,
+			success:function(result){
+				if(!result){//校验失败
+					$("#"+id+"Error").text("邮箱已被注册！");
+					showError($("#"+id+"Error"));
+					return false;
+				}
+			}
+		});
 		 return true;
 	 }else {
 		 $("#"+id+"Error").text("电子邮件格式不正确！");
 			showError($("#"+id+"Error"));
 			return false;
-	}
-	 //是否注册校验
-	 $.ajax({
-		url:"#",//调用的servlet
-		data:{
-			method:"#",//调用方法名
-			email:value
-		},
-		type:'post',
-		dataType:'json',
-		async:false,//异步加载
-		cache:false,
-		success:function(result){
-			if(!result){//校验失败
-				$("#"+id+"Error").text("邮箱已被注册！");
-				showError($("#"+id+"Error"));
-				return false;
-			}
-		}
-	});
-	
-	 return true;
+	} 
 };
 /**
  * 校验验证码
@@ -206,9 +203,9 @@ function validateVerificationCode(){
 	}
 	//是否验证码正确
 	 $.ajax({
-		url:"#",//调用的servlet
+		url:"/goods/UserServlet",//调用的servlet
 		data:{
-			method:"#",//调用方法名
+			method:"ajaxValidateVerifyCode",//调用方法名
 			VerificationCode:value
 		},
 		type:'post',

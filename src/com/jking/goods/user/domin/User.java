@@ -6,6 +6,7 @@ package com.jking.goods.user.domin;
  *
  */
 public class User {
+	//数据表的字段
 	//主键
 	private String uid ; 
 	//登录名
@@ -15,10 +16,39 @@ public class User {
 	//邮箱 
 	private String email ;
 	//状态   true表示激活  或者未激活
-	private int status ;
+	private boolean status ;
 	//激活码 唯一值
 	private String activationCode ;
 	
+	
+	//验证表单的字段
+	//确认密码
+	private String reloginpass ;
+	//验证码
+	private String verifyCode ;
+	
+	//修改密码表单
+	//新密码
+	
+	private String newloginpass ;
+	public String getReloginpass() {
+		return reloginpass;
+	}
+	public void setReloginpass(String reloginpass) {
+		this.reloginpass = reloginpass;
+	}
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+	public String getNewloginpass() {
+		return newloginpass;
+	}
+	public void setNewloginpass(String newloginpass) {
+		this.newloginpass = newloginpass;
+	}
 	public String getUid() {
 		return uid;
 	}
@@ -43,10 +73,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 	public String getActivationCode() {
@@ -59,6 +89,8 @@ public class User {
 	public String toString() {
 		return "User [uid=" + uid + ", loginname=" + loginname + ", loginpass="
 				+ loginpass + ", email=" + email + ", status=" + status
-				+ ", activationCode=" + activationCode + "]";
+				+ ", activationCode=" + activationCode + ", reloginpass="
+				+ reloginpass + ", verifyCode=" + verifyCode
+				+ ", newloginpass=" + newloginpass + "]";
 	}
 }

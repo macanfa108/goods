@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -40,22 +41,22 @@
 				<!--主体-->
 				<div class="panel-body">
 				
-					<form class="form-horizontal" method="post" action="#" id="registForm">
+					<form class="form-horizontal" method="post" action="<c:url value='/UserServlet' />" id="registForm">
 					<!-- 发送参数的隐藏的input -->
-					<input type="hidden" name="method" value='regist'>
+					<input type="hidden" name="method" value="regist">
 					
 						<!--用户名输入-->
 						<div class="form-group">
 							<label for="loginName" class="col-sm-2 control-label">用户名：</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="loginName" name="loginName"
-									placeholder="请输入用户名"  value="">
+									placeholder="请输入用户名"  value="${form.loginname}">
 							</div>
 							<div class="col-sm-4">
-								<p class=" errorMsg bg-danger">
+								<p class="errorMsg bg-danger">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="loginNameError"></span>
+								<span class='Msg' id="loginNameError">${errors.loginname }</span>
 								</p>
 							</div>
 							
@@ -65,13 +66,13 @@
 							<label for="loginpassword" class="col-sm-2 control-label">密码：</label>
 							<div class="col-sm-6">
 								<input type="password" class="form-control" id="loginpassword" name="loginpassword"
-									placeholder="请输入密码"  value="">
+									placeholder="请输入密码"  value="${form.loginpass}">
 							</div>
 							<div class="col-sm-4">
 								<p class="bg-danger text-muted errorMsg">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="loginpasswordError"></span>
+								<span class='Msg' id="loginpasswordError">${errors.loginpass }</span>
 								</p>
 							</div>
 						</div>
@@ -80,13 +81,13 @@
 							<label for="reloginpassword" class="col-sm-2 control-label">确认密码：</label>
 							<div class="col-sm-6">
 								<input type="password" class="form-control" id="reloginpassword" name="reloginpassword"
-									placeholder="请确认密码"  value="">
+									placeholder="请确认密码"  value="${form.reloginpass }">
 							</div>
 							<div class="col-sm-4">
 								<p class="bg-danger text-muted errorMsg">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="reloginpasswordError"></span>
+								<span class='Msg' id="reloginpasswordError">${errors.reloginpass }</span>
 								</p>
 							</div>
 						</div>
@@ -95,13 +96,13 @@
 							<label for="Email" class="col-sm-2 control-label">邮箱：</label>
 							<div class="col-sm-6">
 								<input type="email" class="form-control" id="Email" name="Email"
-									placeholder="请输入邮箱"  value="">
+									placeholder="请输入邮箱"  value="${form.email}">
 							</div>
 							<div class="col-sm-4">
 								<p class="bg-danger text-muted errorMsg">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="EmailError"></span>
+								<span class='Msg' id="EmailError">${errors.email}</span>
 								</p>
 							</div>
 						</div>
@@ -110,13 +111,13 @@
 							<label for="VerificationCode" class="col-sm-2 control-label">验证码：</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="VerificationCode" name="VerificationCode"
-									placeholder="请输入验证码"   value="">
+									placeholder="请输入验证码"   value="${form.verifyCode }">
 							</div>
 							<div class="col-sm-4">
 								<p class="bg-danger text-muted errorMsg">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="VerificationCodeError"></span>
+								<span class='Msg' id="VerificationCodeError">${errors.verifyCode }</span>
 								</p>
 							</div>
 						</div>
