@@ -1,5 +1,4 @@
 src/com/jking/goods/user/domain/User.java
-*.java
 .settings/org.eclipse.core.resources.prefs
 WebRoot/WEB-INF/classes/com/jking/goods/user/domin/User.class
 src/com/jking/goods/user/domain/User.java
