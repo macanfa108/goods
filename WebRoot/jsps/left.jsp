@@ -13,12 +13,11 @@
   <head>
     <title>left</title>
     
-
-
 	<%-- <script type="text/javascript" src="<c:url value='/vendor/bootstrap/js/jquery.js'/>"></script> --%>
 	<script type="text/javascript" src="<c:url value='/menu/mymenu.js'/>"></script>
 	<link rel="stylesheet" href="<c:url value='/menu/mymenu.css'/>" type="text/css" media="all">
 	<%-- <link rel="stylesheet" type="text/css" href="<%=path%>/jsps/css/left.css" /> --%>
+	<script src='<%=path %>/vendor/bootstrap/js/jquery.js'></script>
 <script language="javascript">
 /*
  * 1. 对象名必须与第一个参数相同！
@@ -37,38 +36,12 @@ $(function() {
 	4. body:链接的内容在哪个框架页中显示
 	*/
 
-	bar.add("一级分类1", "一级分类11", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类1", "一级分类12", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类1", "一级分类13", "/goods/jsps/book/list.jsp", "body");
-	
-	bar.add("一级分类2", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类2", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类2", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-	
-	bar.add("一级分类3", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类3", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类3", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-  
-	bar.add("一级分类4", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类4", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类4", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-  
-	bar.add("一级分类5", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类5", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类5", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-  
-	bar.add("一级分类6", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类6", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类6", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-  
-	bar.add("一级分类7", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类7", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类7", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-	
-	bar.add("一级分类8", "一级分类21", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类8", "一级分类22", "/goods/jsps/book/list.jsp", "body");
-	bar.add("一级分类8", "一级分类23", "/goods/jsps/book/list.jsp", "body");
-  
+	<c:forEach items="${parent}" var="parent">
+    	 <c:forEach items="${parent.children}" var="child">
+	     bar.add("${parent.cname}", "${child.cname}", "/goods/jsps/book/list.jsp", "body");
+	     </c:forEach>
+	</c:forEach>
+	 
 	
 	$("#menu").html(bar.toString());
 });

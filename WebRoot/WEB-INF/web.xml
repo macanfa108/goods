@@ -39,4 +39,60 @@
     <servlet-name>VerifyCodeServlet</servlet-name>
     <url-pattern>/VerifyCodeServlet</url-pattern>
   </servlet-mapping>
+  
+  <!-- 拦截器 用户登陆 -->
+  <!-- 
+  <filter>
+  		<filter-name>LoginFilter</filter-name>
+  		<filter-class>com.jking.goods.web.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+  		<url-pattern>/jsps/cart/*</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+  		<url-pattern>CartItemServlet</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+  		<url-pattern>/jsps/order/*</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+  		<url-pattern>OrderServlet</url-pattern>
+  </filter-mapping>
+   -->
+   <!-- 后台管理 -->
+   <servlet>
+   	<servlet-name>AdminServlet</servlet-name>
+   	<servlet-class>com.jking.goods.admin.admin.web.servlet.AdminServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>AdminServlet</servlet-name>
+   	<url-pattern>/AdminServlet</url-pattern>
+   </servlet-mapping>
+    <servlet>
+    <!-- 后台管理 -->
+   	<servlet-name>AdminCategoryServlet</servlet-name>
+   	<servlet-class>com.jking.goods.admin.category.web.servlet.AdminCategoryServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>AdminCategoryServlet</servlet-name>
+   	<url-pattern>/admin/AdminCategoryServlet</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+   	<servlet-name>CategoryServlet</servlet-name>
+   	<servlet-class>com.jking.goods.category.web.servlet.CategoryServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>CategoryServlet</servlet-name>
+   	<url-pattern>/CategoryServlet</url-pattern>
+    </servlet-mapping>
+    
+ 
 </web-app>

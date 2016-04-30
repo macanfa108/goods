@@ -27,8 +27,17 @@
 	href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/jsps/css/user/login.css">
-
-
+	<script type="text/javascript" src="<%=path %>/vendor/bootstrap/js/jquery.js"></script>
+	<script type="text/javascript">
+	$(function(){ /*Map<String(Cookie名称),Cookie(Cookie本身)>*/
+	 	var loginname = window.decodeURI("${cookie.loginName.value}") ;
+	 	//回显的用户名
+	 	if("${requestScope.user.loginname}"){
+	 	   loginname = "${requestScope.user.loginname}" ;
+	 	}
+	 	$("#loginName").val(loginname) ;
+	}) ;
+   </script>
 </head>
 
 <body>
@@ -52,14 +61,15 @@
 						<div class="form-group">
 							<label for="loginName" class="col-sm-2 control-label">用户名：</label>
 							<div class="col-sm-6">
+								<!-- js判断回显还是现实Cookie的值  ${user.loginname} -->
 								<input type="text" class="form-control" id="loginName" name="loginName"
-									placeholder="请输入用户名"  value="${user.loginname}">
+									placeholder="请输入用户名"  value="">
 							</div>
 							<div class="col-sm-4">
 								<p class=" errorMsg bg-danger">
 								<span class='glyphicon glyphicon-remove'></span> 
 								<!-- 后台返回的错误信息.Msg -->
-								<span class='Msg' id="loginNameError">${loginerrors.loginname}</span>
+								<span class='Msg' id="loginNameError">${loginerrors.loginname}${msg}</span>
 								</p>
 							</div>
 							

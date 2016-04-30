@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.jking.goods.user.domain.User;
+import com.sun.org.apache.xml.internal.utils.IntVector;
 
 import cn.itcast.jdbc.TxQueryRunner;
 
@@ -81,4 +82,21 @@ public class UserDAO {
 		return  qr.query(sql, new BeanHandler<User>(User.class),loginname,loginpass) ;
 		   
 	} 
+	/**
+	 * 通过密码账号查询
+	 * @param uid
+	 * @param password
+	 * @return
+	 * @throws SQLException 
+	 */
+	public boolean findByUidAndPassword(String uid ,String password) throws SQLException{
+		String sql = "SELECT COUNT(*) FROM t_user WHERE uid = ? AND loginpass = ? " ;
+		Number number = (Number)qr.query(sql, new ScalarHandler(),uid,password) ;
+		return number.intValue() > 0 ; //大于0 表示有数据存在
+	}
+	
+	public void updatePassword(String uid ,String password) throws SQLException{
+		String sql = "UPDATE t_user SET loginpass = ? WHERE uid = ?" ;
+		qr.update(sql,password,uid) ;
+	}
 }

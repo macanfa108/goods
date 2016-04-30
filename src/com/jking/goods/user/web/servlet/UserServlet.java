@@ -171,6 +171,52 @@ public class UserServlet extends BaseServlet {
 		}
 		return login_errors;
 	}
+	
+	/**
+	 * 登陆校验
+	 * 
+	 * @param formUser
+	 * @return
+	 */
+	private Map<String, String> validatePassword(User formUser, HttpSession session) {
+		Map<String, String> password_errors = new HashedMap();
+		String loginname = formUser.getLoginname();
+		// 1.判断用户名
+		if (loginname == null || loginname.trim().isEmpty()) {
+			password_errors.put("loginname", "用户名不能为空");
+		} else if (loginname.length() < 3 || loginname.length() > 20) {
+			password_errors.put("loginname", "用户名长度必须在3到20之间");
+		}
+		// 2.登陆密码
+		String loginpass = formUser.getLoginpass();
+		// 1.判断用户名
+		if (loginpass == null || loginpass.trim().isEmpty()) {
+			password_errors.put("loginpass", "密码不能为空");
+		} else if (loginname.length() < 3 || loginname.length() > 20) {
+			password_errors.put("loginpass", "密码长度必须在3到20之间");
+		}
+		// 2.登陆密码
+				String newloginpass = formUser.getNewloginpass() ;
+				// 1.判断用户名
+				if (newloginpass == null || newloginpass.trim().isEmpty()) {
+					password_errors.put("loginpass", "密码不能为空");
+				} else if (newloginpass.length() < 3 || loginname.length() > 20) {
+					password_errors.put("loginpass", "密码长度必须在3到20之间");
+				}else if(newloginpass.equals(formUser.getLoginpass())){
+					password_errors.put("loginpass", "请重新修改密码 ");
+				}
+		// 5.验证码 校验
+		String verifyCode = formUser.getVerifyCode();
+
+		String vcode = (String) session.getAttribute("vCode");
+
+		if (verifyCode == null || verifyCode.trim().isEmpty()) {
+			password_errors.put("verifyCode", "验证码不能为空");
+		} else if (!verifyCode.equalsIgnoreCase(vcode)) {
+			password_errors.put("verifyCode", "验证码失败");
+		}
+		return password_errors;
+	}
 
 	/**
 	 * 用户名注册
@@ -301,13 +347,60 @@ public class UserServlet extends BaseServlet {
 			req.getSession().setAttribute("sessionUser", user);
 
 			String loginName = user.getLoginname();
+			//防止中文乱码。
 			loginName = URLEncoder.encode(loginName, "utf-8");
 
 			Cookie cookie = new Cookie("loginName", loginName);
 			cookie.setMaxAge(1000 * 60 * 60 * 24 * 10);
 			resp.addCookie(cookie);
+			
 			return "r:/index.jsp";
 		}
 
+	}
+	/**
+	 * 修改密码  必须修改
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String updatePassWord(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		//1.封装表单数据
+		 User formUser = CommonUtils.toBean(req.getParameterMap(), User.class) ;
+		//2.验证表单数据 
+		 User user = (User)req.getSession().getAttribute("sessionUser") ;
+		 //如果用户没有登录 返回登陆页面 显示错误消息 
+		 if(user == null){ //鸡肋功能
+			 req.setAttribute("msg", "您还没有登录") ;
+			 return "f:/jsps/user/login.jsp" ;
+		 }
+		 //3.数据库验证
+		 try {
+			userService.updatePassword(user.getUid(), formUser.getNewloginpass(), formUser.getLoginpass()) ;
+			req.setAttribute("msg", "修改密码成功") ;
+			req.setAttribute("code","success") ;
+			return "f:/jsps/msg.jsp" ;
+		 } catch (UserException e) {
+			 req.setAttribute("msg", e.getMessage()) ;
+			 req.setAttribute("form","formUser") ;
+			 //修改密码页面
+			 return "f:/jsps/user/pwd.jsp" ;
+		}
+	}
+	/**
+	 * 退出功能
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String quit(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.getSession().invalidate() ;
+		return "r:/jsps/user/login.jsp"; 
 	}
 }

@@ -140,4 +140,18 @@ public class UserService {
 		}
 	}
 
+	public void updatePassword(String uid, String newPasss, String oldPass) throws UserException {
+		
+		try {
+			boolean flag = userDAO.findByUidAndPassword(uid, newPasss) ;
+			if(!flag) 
+				throw new UserException("旧密码错误 ") ;
+			
+			 userDAO.updatePassword(uid, newPasss) ;
+		} catch (SQLException e) {
+			throw new RuntimeException(e) ;
+		}
+		
+	}
+	 
 }

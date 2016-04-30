@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -24,14 +25,16 @@
 <!-- my css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/jsps/css/main.css" />
-<script src='<%=path%>/vendor/bootstrap/js/jquery.js'></script>
+<script src='<%=path %>/vendor/bootstrap/js/jquery.js'></script>
 </head>
 <body>
 	<jsp:include page="top.jsp"></jsp:include>
 	<div class='container'>
 		<!--左侧菜单  -->
 		<div id='leftPart'>
-			<jsp:include page="left.jsp"></jsp:include>
+		 
+		 <!--  <jsp:include page="left.jsp"></jsp:include> -->
+		    <iframe id='leftIframe' border=0 src='<%=path %>/CategoryServlet?method=findAll' name='body'  frameborder='0' scrolling='no' onload='iFrameHeight(this.id);'></iframe>
 		</div>
 		<!-- 右侧banner -->
 		<div id='rightPart'>
@@ -42,16 +45,16 @@
 	</div>
 	<div class='height_20'></div>
 	<div class='container'>
-		<iframe id='iframepage' border=0 src='<%=path %>/jsps/book/list.jsp' name='body'  frameborder='0' scrolling='no'  width='100%‘ onload='iFrameHeight();'></iframe>
+		<iframe id='iframepage' border=0 src='<%=path %>/jsps/book/list.jsp' name='body'  frameborder='0' scrolling='no'  width='100%' onload='iFrameHeight(this.id);'></iframe>
 	</div>
 
 
-	<script src='<%=path%>/vendor/bootstrap/js/bootstrap.min.js'></script>
+	<script src='<%=path %>/vendor/bootstrap/js/bootstrap.min.js'></script>
 	   
     <script type="text/javascript" >   
-    function iFrameHeight() {   
-    var ifm= document.getElementById("iframepage");   
-    var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;   
+    function iFrameHeight(ID) {   
+    var ifm= document.getElementById(ID);   
+    var subWeb = document.frames ? document.frames[ID].document : ifm.contentDocument;   
     if(ifm != null && subWeb != null) {
        ifm.height = subWeb.body.scrollHeight;
        ifm.width = subWeb.body.scrollWidth;
