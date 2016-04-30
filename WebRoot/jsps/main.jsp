@@ -27,8 +27,10 @@
 <script src='<%=path%>/vendor/bootstrap/js/jquery.js'></script>
 </head>
 <body>
+		<!--引入头部文件  -->
 	<jsp:include page="top.jsp"></jsp:include>
-	<div class='container'>
+	
+	<div class='minWidth'>
 		<!--左侧菜单  -->
 		<div id='leftPart'>
 			<jsp:include page="left.jsp"></jsp:include>
@@ -41,22 +43,45 @@
 
 	</div>
 	<div class='height_20'></div>
+	<!-- 产品展示区 -->
 	<div class='container'>
-		<iframe id='iframepage' border=0 src='<%=path %>/jsps/book/list.jsp' name='body'  frameborder='0' scrolling='no'  width='100%‘ onload='iFrameHeight();'></iframe>
-	</div>
 
+		<iframe id='iframepage' frameborder=”no” border=”0″
+			src='<%=path%>/jsps/book/list.jsp' name='body' scrolling=no
+			width="100%" height='auto' onLoad='reinitIframe();'></iframe>
+	</div>
+	<!-- 底部展示区 -->
+			<jsp:include page='footer.jsp' />
 
 	<script src='<%=path%>/vendor/bootstrap/js/bootstrap.min.js'></script>
-	   
-    <script type="text/javascript" >   
-    function iFrameHeight() {   
-    var ifm= document.getElementById("iframepage");   
-    var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;   
-    if(ifm != null && subWeb != null) {
-       ifm.height = subWeb.body.scrollHeight;
-       ifm.width = subWeb.body.scrollWidth;
-    }   
-    }   
-    </script>
+
+	<script type="text/javascript" language="javascript">
+		function reinitIframe() {
+			var iframe = document.getElementById("iframepage");
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+			} catch (ex) {
+			}
+		}
+
+		var timer1 = window.setInterval("reinitIframe()", 500); //定时开始  
+
+		function reinitIframeEND() {
+			var iframe = document.getElementById("iframepage");
+			try {
+				var bHeight = iframe.contentWindow.document.body.scrollHeight;
+				var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+				var height = Math.max(bHeight, dHeight);
+				iframe.height = height;
+			} catch (ex) {
+			}
+			// 停止定时  
+			window.clearInterval(timer1);
+
+		}
+	</script>
 </body>
 </html>

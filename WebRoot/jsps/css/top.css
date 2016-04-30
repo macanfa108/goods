@@ -32,9 +32,12 @@
 	height:85px;
 	line-height:85px;
 	background:#207BD9;
-
+	
 }
 
 .searchPart .logoBox{
 	margin:10px auto;
+}
+#searchForm{
+	margin:24px auto;
 }

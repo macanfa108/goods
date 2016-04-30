@@ -1,21 +1,30 @@
 @CHARSET "UTF-8";
+body{
+	overflow:scroll;
+	overflow-x:hidden;
+}
 .height_20{
 	clear:both;
 	height:20px;
+}
+.minWidth{
+	width:990px;
+	margin:0 auto;
 }
 #leftPart{
 	width:180px; 
 	height:360px;;
 	 margin-top: 16px;
-	/* border:1px solid red; */
+	
 	float:left;
 }
 #rightPart{
 	
 	/* width:180px; */
-	 /* margin-top: -16px; */
-/* 	border:1px solid red; */
-	float:right;
+	 margin-top: 16px; 
+	 
+	 float:right;
+	/* display:inline-block; */
 	/* margin-left:60px; */
 	
 }
