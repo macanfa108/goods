@@ -28,8 +28,10 @@
 <script src='<%=path %>/vendor/bootstrap/js/jquery.js'></script>
 </head>
 <body>
+		<!--引入头部文件  -->
 	<jsp:include page="top.jsp"></jsp:include>
 	<div class='container'>
+	<div class='minWidth'>
 		<!--左侧菜单  -->
 		<div id='leftPart'>
 		 
@@ -44,11 +46,17 @@
 
 	</div>
 	<div class='height_20'></div>
+	<!-- 产品展示区 -->
 	<div class='container'>
+ 
 		<iframe id='iframepage' border=0 src='<%=path %>/jsps/book/list.jsp' name='body'  frameborder='0' scrolling='no'  width='100%' onload='iFrameHeight(this.id);'></iframe>
 	</div>
+ 
+		 
+	<!-- 底部展示区 -->
+			<jsp:include page='footer.jsp' />
 
-
+ 
 	<script src='<%=path %>/vendor/bootstrap/js/bootstrap.min.js'></script>
 	   
     <script type="text/javascript" >   
@@ -61,5 +69,6 @@
     }   
     }   
     </script>
+ 
 </body>
 </html>

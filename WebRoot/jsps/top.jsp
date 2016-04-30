@@ -62,21 +62,23 @@ href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css" /> --%>
 	</div>
 	<!-- /.container-fluid --> </nav>
 	<!-- logo和搜索框 -->
-	<div class='container-fluid  searchPart''>
+	<div class='container-fluid  searchPart ''>
 		<div class='container'>
 			<div class='pull-left logoBox'>
 				<img src="<%=path%>/images/logo.png">
 			</div>
-				<!-- 按名称搜索表单 -->
-			<form class="navbar-form navbar-right" role="search">
-				<div class="form-group">
+			<!-- 按名称搜索表单 -->
+			<form class="navbar-form navbar-right" role="search" id="searchForm" action='#' >
+				<div class="input-group">
 					<input type="hidden" name="method" value="#" /> <input type="text"
-						class='form-control' name="bookName" placeholder='搜索您要的图书' />
+						class='form-control' name="bookName" placeholder='搜索您要的图书' /> <span
+						class="input-group-btn"> <a href="#"
+						class="btn btn-default" target='body'>搜索</a>
+					</span>
 				</div>
-				<a href="#" class="btn btn-default" target='body'>搜索</a>
 			</form>
-		
-			
+
+
 		</div>
 
 	</div>
