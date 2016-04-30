@@ -9,7 +9,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import com.jking.goods.category.domain.Category;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
 
 import cn.itcast.commons.CommonUtils;
 import cn.itcast.jdbc.TxQueryRunner;

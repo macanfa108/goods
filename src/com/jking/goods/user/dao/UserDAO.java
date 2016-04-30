@@ -7,7 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.jking.goods.user.domain.User;
-import com.sun.org.apache.xml.internal.utils.IntVector;
+
 
 import cn.itcast.jdbc.TxQueryRunner;
 
