@@ -3,3 +3,4 @@ src/com/jking/goods/user/domain/User.java
 .settings/org.eclipse.core.resources.prefs
 WebRoot/WEB-INF/classes/com/jking/goods/user/domin/User.class
 src/com/jking/goods/user/domain/User.java
+.myeclipse/profiler/goods on Tomcat  8.x.xml
