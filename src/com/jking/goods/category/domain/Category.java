@@ -7,10 +7,10 @@ public class Category {
 	private String cid ;
 	//分类名称
 	private String cname ;
-	//父分类
-	private Category parent ;
-	//子分类
-	private List<Category> children ;
+	
+	private Category parent ;  //父分类
+	
+	private List<Category> children ;  //子分类
 	@Override
 	public String toString() {
 		return "Category [cid=" + cid + ", cname=" + cname + ", parent="

@@ -2,12 +2,12 @@ package com.jking.goods.category.service;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import com.jking.goods.category.dao.CategoryDAO;
 import com.jking.goods.category.domain.Category;
  
 
 public class CategoryService {
+	
 	private CategoryDAO categoryDAO = new CategoryDAO() ;
 	/**
 	 * 查询所有的分类

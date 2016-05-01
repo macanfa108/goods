@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -24,10 +24,10 @@
 	href="<c:url value='/vendor/bootstrap/css/bootstrap.min.css'/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/jsps/css/user/regist.css'/>">
-
+	
 </head>
 <body>
-<!-- 转发到main.jsp图书商城首页 -->
+    <!-- 转发到main.jsp图书商城首页 -->
 	<jsp:forward page="/jsps/main.jsp"></jsp:forward>
 </body>
 </html>

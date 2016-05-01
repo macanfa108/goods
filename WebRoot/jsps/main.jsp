@@ -49,7 +49,7 @@
 	<!-- 产品展示区 -->
 	<div class='container'>
  
-		<iframe id='iframepage' border=0 src='<%=path %>/jsps/book/list.jsp' name='body'  frameborder='0' scrolling='no'  width='100%' onload='iFrameHeight(this.id);'></iframe>
+		<iframe id='iframepage' border=0 src='<%=path %>/BookServlet?method=findAllBooks' name='body'  frameborder='0' scrolling='no'  width='100%' onload='iFrameHeight(this.id);'></iframe>
 	</div>
  
 		 
