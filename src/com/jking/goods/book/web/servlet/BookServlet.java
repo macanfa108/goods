@@ -38,7 +38,7 @@ public class BookServlet extends BaseServlet {
 	 * @return
 	 */
 	private String getUrl(HttpServletRequest req){
-		String url = req.getRequestURI() +  req.getQueryString();  
+		String url = req.getRequestURI() + "?" + req.getQueryString();  
 		
 		int index = url.indexOf("&pc=") ;
 		if(index != -1 ){

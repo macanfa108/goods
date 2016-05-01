@@ -8,7 +8,7 @@
 		</property>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
 		<property name="user">root</property>
-		<property name="password">830520</property>
+		<property name="password">123456</property>
 		<!-- 注意修改数据库密码  -->
 		<property name="acquireIncrement">3</property>
 		<property name="initialPoolSize">10</property>

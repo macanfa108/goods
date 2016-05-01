@@ -25,18 +25,16 @@
 	<div class="container">
 
 		<h2>图书列表</h2>
-		<c:forEach items="${pb.beanList}" var="book"></c:forEach>
-		<div class="row">
-			<!-- 每行3列 循环项 -->
-			<div class="col-md-3">
+		<c:forEach items="${pb.beanList}" var="book">
+		 
+				<div class=" col-md-3">
 				<!-- 每个图书 -->
 				<div class="thumbnail card">
-					<a href='<%=path%>/jsps/book/description.jsp'>
-					 <img
-						src="<c:url value='/${book.image_b}'/>" />
+					<a href='<%=path%>/jsps/book/description.jsp'> <img src="<c:url value='/${book.image_b}'/>" />
 						<div class="caption">
-							<a href='<%=path%>/jsps/book/description.jsp''>
-								<p class='noWrap'>${book.bname}</p> </a>
+							<a href='#'>
+								<p class='noWrap'>${book.bname}</p>
+							</a>
 							<p class='text-primary'>
 								<a href='#'>${book.author} </a>编著
 							</p>
@@ -46,27 +44,34 @@
 
 							<p>
 								<span class='CurrentPrice'>${book.currPrice}</span> <span class='OldPrice'>${book.price}</span><span
-									class='Count'>${book.discount}折</span>
+									class='Count'>${book.discount} 折</span>
 							</p>
-						</div> </a>
+						</div>
+					</a>
 
 				</div>
-
+				<!-- 每个图书 -->
 			</div>
-
-		</div>
-		 
+			
+			</c:forEach>
 	<!-- row -->
 	<div class='container'>
 		<nav class='row pull-right'> <!-- 分页导航栏 -->
 		<ul class="pagination '">
 			<!-- 上一页 -->
-			<li class="disabled"><span aria-hidden="true">上一页</span>
-			</li>
-			<li><a href="#" aria-label="Previous"><span
+			<c:choose>
+				<c:when test="${pb.pc eq 1}"><li class="disabled"><span aria-hidden="true">上一页</span></li></c:when>
+			<c:otherwise>
+			   <li>
+				<a href="${pb.url}&pc=${pb.pc-1}" aria-label="Previous"><span
 					aria-hidden="true">上一页</span>
-			</a>
-			</li>
+			    </a>
+			   </li>
+			</c:otherwise>
+			</c:choose>
+			 <!-- 变化 begin end 
+			 	     不足6页  begin
+			 -->
 			<!-- 上一页 -->
 			<li class="active"><a href="#">1</a>
 			</li>
@@ -84,20 +89,27 @@
 			<li><span>...</span>
 			</li>
 			<!-- 下一页 -->
-
-			<li class="disabled"><a href="#" aria-label="Previous"><span
-					aria-hidden="true">下一页</span>
-			</a>
-			</li>
-			<li class="disabled"><span aria-hidden="true">下一页</span>
-			</li>
+			<c:choose>
+			 	<c:when test="${pb.pc eq pb.tp}"><li class="disabled"><span aria-hidden="true">下一页</span></li>
+				</c:when>
+				<c:otherwise>
+				<!-- class="disabled" -->
+				  <li>
+				  <a href="${pb.url}&pc=${pb.pc+1}" aria-label="Previous"><span
+					    aria-hidden="true">下一页</span></a>
+				</li>
+				</c:otherwise>
+			</c:choose>
+			
+			
+			
 			<!-- 下一页 -->
 
 			<!-- 总页数 -->
-			<span class='totalPage'>共12页</span>
+			<span class='totalPage'>共${pb.tp}页</span>
 			<!-- 定位到指定页数 -->
 			<span class='goPageSize '> 到 <input type='text'
-				name='searchForPageSize' class='form-control' id='searchForPageSize' ' />
+				name='searchForPageSize' class='form-control' id='searchForPageSize'  value='${pb.pc }' />
 				页 <a href='javascript:goPageSize();' class='btn btn-default '
 				id='sureSize'>确定</a> </span>
 		</ul>
@@ -117,12 +129,12 @@
 				alert("请输入正确的页码！");
 				return false;
 			}
-			var MaxPageSize = 10;//此处的10为后台传过来的最大页码
+			var MaxPageSize = ${pb.tp};//此处的10为后台传过来的最大页码
 			if (pageSize > MaxPageSize) {
 				alert('请输入正确页码！');
 				return false;
 			}
-			location = "www.baidu.com";//此处的url为请求的后台链接（加上参数）
+			location = "${pb.url}&pc=" + pc;//此处的url为请求的后台链接（加上参数）
 		}
 	</script>
 </html>

@@ -94,5 +94,13 @@
    	<url-pattern>/CategoryServlet</url-pattern>
     </servlet-mapping>
     
+       <servlet>
+   	<servlet-name>BookServlet</servlet-name>
+   	<servlet-class>com.jking.goods.book.web.servlet.BookServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   	<servlet-name>BookServlet</servlet-name>
+   	<url-pattern>/BookServlet</url-pattern>
+    </servlet-mapping>
  
 </web-app>
