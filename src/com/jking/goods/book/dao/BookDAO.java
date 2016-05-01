@@ -3,15 +3,19 @@ package com.jking.goods.book.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.jking.goods.book.domain.Book;
+import com.jking.goods.category.domain.Category;
 import com.jking.goods.pager.Expression;
 import com.jking.goods.pager.PageBean;
 
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.jdbc.TxQueryRunner;
 
 public class BookDAO {
@@ -37,7 +41,8 @@ public class BookDAO {
 		List<Object> param = new ArrayList<Object>();
 
 		// System.out.println(param.toArray()) ;
-
+		 if( expression != null){ 
+			 
 		for (Expression expr : expression) {
 
 			sb.append("  ").append("and").append("  ").append(expr.getName())
@@ -52,7 +57,7 @@ public class BookDAO {
 
 			}
 		}
-
+	}
 		System.out.println("查询条件 " + sb);
 
 		String sql = "SELECT count(*) FROM t_book " + sb;
@@ -62,7 +67,7 @@ public class BookDAO {
 
 		int totalNumber = number.intValue(); // 记录数
 
-		sql = "SELECT * FROM t_book " + sb + "ORDER BY orderby LIMIT ?,? ";
+		sql = "SELECT * FROM t_book " + sb + "   ORDER BY orderby LIMIT ?,? ";
 
 		param.add((pc - 1) * ps); // 第一页 0，5 第二页 6，5
 									// ps每页显示的记录数 pc当前页数
@@ -118,7 +123,7 @@ public class BookDAO {
 
 		List<Expression> exprList = new ArrayList<Expression>();
 
-		exprList.add(new Expression("cname", "like", bname));
+		exprList.add(new Expression("bname", "like", "%"+bname+"%"));
 
 		return findByCriteria(exprList, pc);
 	}
@@ -138,6 +143,23 @@ public class BookDAO {
 		List<Expression> exprList = new ArrayList<Expression>();
 
 		exprList.add(new Expression("author", "like", "%" + author + "%"));
+
+		return findByCriteria(exprList, pc);
+
+	}
+	/**
+	 * 出版社查询
+	 * @param author
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Book> findByPress(String press, int pc)
+			throws SQLException {
+
+		List<Expression> exprList = new ArrayList<Expression>();
+
+		exprList.add(new Expression("press", "like", "%" + press + "%"));
 
 		return findByCriteria(exprList, pc);
 
@@ -177,10 +199,32 @@ public class BookDAO {
 	public PageBean<Book> findAllBooks( int pc)
 			throws SQLException {
 		
-		List<Expression> exprList = new ArrayList<Expression>();
+		//List<Expression> exprList = new ArrayList<Expression>();
 
-		exprList.add(new Expression("1", "=", "1"));
+		//exprList.add(new Expression("1", "=", "1"));
 
-		return findByCriteria(exprList, pc);
+		return findByCriteria(null, pc);
+	}
+	/**
+	 * 按照BookId查询图书
+	 * @param bookid
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public Book findByBookid(String bookid)
+			throws SQLException {
+
+		 String sql = "SELECT * FROM t_book WHERE bid = ? " ;
+
+		 Map<String,Object> map = qr.query(sql, new MapHandler(),bookid) ;
+		 
+		 Book book = CommonUtils.toBean(map, Book.class) ;
+		 //cid属性 
+		 Category category = CommonUtils.toBean(map, Category.class) ;
+
+		 book.setCategory(category) ;
+		 
+		 return book ;
 	}
 }

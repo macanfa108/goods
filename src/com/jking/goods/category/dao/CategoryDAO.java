@@ -99,4 +99,21 @@ public class CategoryDAO {
 
 		return toCategoryList(mapList);
 	}
+	/**
+	 *  增加类别
+	 * @param category
+	 * @throws SQLException 
+	 */
+	public void add(Category category) throws SQLException{
+		
+		String sql = "INSERT INTO t_category(cid,cname,pid,`desc`) value(?,?,?,?) " ;
+		//判断是否一级分类
+		String pid = null ;
+		if(category.getParent()!= null){
+			pid = category.getParent().getCid() ;
+		}
+		Object[] params = { category.getCid() ,category.getCname(),pid ,category.getDesc() } ;
+		
+		qr.update(sql, params) ;
+	}
 }

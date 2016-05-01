@@ -76,11 +76,12 @@ href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css" /> --%>
 			</div>
 			<!-- 按名称搜索表单 -->
 			<form class="navbar-form navbar-right" role="search" id="searchForm"
-				action='#'>
+				action='BookServlet'>
 				<div class="input-group">
-					<input type="hidden" name="method" value="#" /> <input type="text"
+					<input type="hidden" name="method" value="findByBname" /> <input type="text"
 						class='form-control' name="bookName" placeholder='搜索您要的图书' /> <span
-						class="input-group-btn"> <a href="#"
+						class="input-group-btn"> 
+						<a href="javascript:document.getElementById('searchForm').submit() ;"
 						class="btn btn-default" target='body'>搜索</a> </span>
 				</div>
 			</form>

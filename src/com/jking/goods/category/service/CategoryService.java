@@ -20,4 +20,15 @@ public class CategoryService {
 			 throw new RuntimeException(e) ;
 		}
 	}
+	/**
+	 * 添加类别
+	 * @param category
+	 */
+	public void addCategory(Category category){
+		try {
+			categoryDAO.add(category) ;
+		} catch (SQLException e) {
+			 throw new RuntimeException(e) ;
+		}
+	}
 }

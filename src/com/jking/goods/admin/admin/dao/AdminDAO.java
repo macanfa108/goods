@@ -10,6 +10,7 @@ import com.jking.goods.admin.admin.domain.Admin;
 import cn.itcast.jdbc.TxQueryRunner;
 
 public class AdminDAO {
+	
 	private QueryRunner qr = new  TxQueryRunner() ;
 	
 	/**
@@ -20,7 +21,10 @@ public class AdminDAO {
 	 * @throws SQLException
 	 */
 	public Admin find(String adminname ,String adminpwd) throws SQLException{
+		
 		String sql = "SELECT * FROM t_admin WHERE adminname= ? AND adminpwd = ?" ;
+	
 		return qr.query(sql, new BeanHandler<Admin>(Admin.class),adminname,adminpwd) ;
+
 	}
 }

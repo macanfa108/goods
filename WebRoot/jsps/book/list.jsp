@@ -26,18 +26,32 @@
 		 
 				<div class=" col-md-3">
 				<!-- 每个图书 -->
+				<%--url会自动对参数进行编码 --%>
+				<c:url value="/BookServlet" var="authorUrl">
+					<c:param name="method" value="findByAuthor" />
+					<c:param name="author" value="${book.author}"></c:param> 
+				</c:url>
+				<c:url value="/BookServlet" var="pressUrl">
+					<c:param name="method" value="findByPress" />
+					<c:param name="press" value="${book.press}"></c:param> 
+				</c:url>
+				
+				<c:url value="/BookServlet" var="bookUrl">
+					<c:param name="method" value="load" />
+					<c:param name="bid" value="${book.bid}"></c:param> 
+				</c:url>		
+						 
 				<div class="thumbnail card">
-					<a href='<%=path%>/jsps/book/description.jsp'> <img src="<c:url value='/${book.image_b}'/>" />
-
+					<a href='${bookUrl}'> <img src="<c:url value='/${book.image_b}'/>" />
 						<div class="caption">
-							<a href='#'>
+							<a href='${bookUrl}'>
 								<p class='noWrap'>${book.bname}</p>
 							</a>
 							<p class='text-primary'>
-								<a href='#'>${book.author} </a>编著
+								<a href="${authorUrl}">${book.author} </a>编著
 							</p>
 							<p class='text-primary'>
-								<a href='#'>${book.press}</a>
+								<a href="${pressUrl}">${book.press}</a>
 							</p>
 							<p>
 								<span class='CurrentPrice'>${book.currPrice}</span> <span class='OldPrice'>${book.price}</span><span

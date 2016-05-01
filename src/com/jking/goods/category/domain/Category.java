@@ -11,10 +11,19 @@ public class Category {
 	private Category parent ;  //父分类
 	
 	private List<Category> children ;  //子分类
+	
+	private String desc ;
+	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	@Override
 	public String toString() {
 		return "Category [cid=" + cid + ", cname=" + cname + ", parent="
-				+ parent + ", children=" + children + "]";
+				+ parent + ", children=" + children + ", desc=" + desc + "]";
 	}
 	public String getCid() {
 		return cid;

@@ -36,7 +36,7 @@
 		<div id='leftPart'>
 		 
 		 <!--  <jsp:include page="left.jsp"></jsp:include> -->
-		    <iframe id='leftIframe' border=0 src='<%=path %>/CategoryServlet?method=findAll' name='body'  frameborder='0' scrolling='no'  width='100%' height='100%'></iframe>
+		    <iframe id='leftIframe' border=0 src='<%=path %>/CategoryServlet?method=findAll' name='left'  frameborder='0' scrolling='no'  width='100%' height='100%'></iframe>
 		</div>
 		<!-- 右侧banner -->
 		<div id='rightPart'>

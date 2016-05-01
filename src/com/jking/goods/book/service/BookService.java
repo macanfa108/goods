@@ -25,10 +25,29 @@ public class BookService {
 			throw new RuntimeException(e);
 		}
 	}
-
+	/**
+	 * 加载Book
+	 * @param bookid
+	 * @return
+	 */
+	public Book load(String bookid){
+		try {
+			return bookDAO.findByBookid(bookid) ;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public PageBean<Book> findByAuthor(String author, int pc) {
 		try {
 			return bookDAO.findByAuthor(author, pc);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public PageBean<Book> findByPress(String press, int pc) {
+		try {
+			return bookDAO.findByPress(press, pc);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
