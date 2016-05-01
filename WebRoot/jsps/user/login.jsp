@@ -29,7 +29,8 @@
 	href="<%=path%>/jsps/css/user/login.css">
 	<script type="text/javascript" src="<%=path %>/vendor/bootstrap/js/jquery.js"></script>
 	<script type="text/javascript">
-	$(function(){ /*Map<String(Cookie名称),Cookie(Cookie本身)>*/
+	$(function(){ 
+		/*Map<String(Cookie名称),Cookie(Cookie本身)>*/
 	 	var loginname = window.decodeURI("${cookie.loginName.value}") ;
 	 	//回显的用户名
 	 	if("${requestScope.user.loginname}"){
@@ -39,12 +40,10 @@
 	}) ;
    </script>
 </head>
-
 <body>
 
 	<div class="container">
 	<div class="box">
-		   
 		  <div class="registBox">
 			<!--面板-->
 			<div class="panel  panel-info">

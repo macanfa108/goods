@@ -1,9 +1,15 @@
 package com.jking.goods.pager;
-
+/**
+ *  封装查询条件
+ *  name  条件  value 
+ * @author joker
+ *
+ */
 public class Expression {
-	private String name ;
-	private String operator ;
-	private String value ;
+	
+	private String name ;         //列名
+	private String operator ;    //条件
+	private String value ;		  //值
 	public String getName() {
 		return name;
 	}

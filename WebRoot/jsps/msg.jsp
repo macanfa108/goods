@@ -42,14 +42,15 @@
 
 <body>
 	<div class="panel panel-primary statusPanel">
-		<div class="panel-heading">用户激活状态</div>
+		<!-- 表示执行操作的状态 -->
+		<div class="panel-heading">${code}</div>
 		<div class="panel-body">
 			<h1 class="text-primary">${msg}</h1>
 		</div>
 		<div class="panel-footer">
 		<div class="center-block">
 				 <a href="<%=path %>/jsps/user/login.jsp" class="btn btn-success btn-lg" role="button">马上登录</a>
-				 <a href="<%=path %>/jsps/body.jsp" class="btn btn-primary btn-lg" role="button">回到首页</a>
+				 <a href="<%=path %>/jsps/main.jsp" class="btn btn-primary btn-lg" role="button">回到首页</a>
 			</div>
 		</div>
 	</div>

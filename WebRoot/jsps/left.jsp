@@ -41,13 +41,10 @@ $(function() {
 	     bar.add("${parent.cname}", "${child.cname}", "/goods/BookServlet?method=findByCategory&cid=${child.cid}", "body");
 	     </c:forEach>
 	</c:forEach>
-	 
-	
 	$("#menu").html(bar.toString());
 });
 </script>
 </head>
-  
 <body>  
   <div id="menu"></div>
 </body>

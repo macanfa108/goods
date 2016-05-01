@@ -17,11 +17,21 @@ public class CategoryServlet extends cn.itcast.servlet.BaseServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private CategoryService categoryService = new CategoryService() ;
-	
+	/**
+	 * 显示列表 
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public String findAll(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		 List<Category> parent  = categoryService.findAll() ;
+		
 		 req.setAttribute("parent", parent) ;
+		 
 		 return "f:/jsps/left.jsp" ;
 	}
 }

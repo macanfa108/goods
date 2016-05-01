@@ -41,35 +41,43 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String regist(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("regist");
+
 		// 封装数据
 		Map<String, String> userMap = new HashMap<String, String>();
 		String loginname = req.getParameter("loginName");
 		String loginpass = req.getParameter("loginpassword");
 		String reloginpass = req.getParameter("reloginpassword");
+
 		String email = req.getParameter("Email");
 		String verifyCode = req.getParameter("VerificationCode");
+
 		userMap.put("loginname", loginname);
 		userMap.put("loginpass", loginpass);
 		userMap.put("reloginpass", reloginpass);
 		userMap.put("email", email);
 		userMap.put("verifyCode", verifyCode);
 
-		User formUser = CommonUtils.toBean(userMap, User.class);
-		
-		// 检验
-		Map<String, String> errors = validateRegist(formUser, req.getSession());
+		User formUser = CommonUtils.toBean(userMap, User.class); // 封装数据
 
+		Map<String, String> errors = validateRegist(formUser, req.getSession()); // 后台
+																					// 验证数据的正确性
+
+		// 判断数据是否合法
 		if (errors.size() > 0) {
-			req.setAttribute("form", formUser);
-			req.setAttribute("errors", errors);
+
+			req.setAttribute("form", formUser); // 保存用户数据 回显
+
+			req.setAttribute("errors", errors); // 保存错误消息 交互
+
 			return "f:/jsps/user/regist.jsp";
 		}
-
+		// 注册用户
 		userService.regist(formUser);
 
-		req.setAttribute("code", "success");
-		req.setAttribute("msg", "注册成功,马上到邮箱激活");
+		req.setAttribute("code", "success"); // 错误时显示的图片
+
+		req.setAttribute("msg", "注册成功,马上到邮箱激活"); // 注册成功的回馈消息
+
 		return "f:/jsps/msg.jsp";
 
 	}
@@ -78,12 +86,16 @@ public class UserServlet extends BaseServlet {
 	 * 注册校验
 	 * 
 	 * @param formUser
+	 *            封装的表单数据
 	 * @return
 	 */
 	private Map<String, String> validateRegist(User formUser,
 			HttpSession session) {
+
 		Map<String, String> errors = new HashedMap();
+
 		String loginname = formUser.getLoginname();
+
 		// 1.判断用户名
 		if (loginname == null || loginname.trim().isEmpty()) {
 			errors.put("loginname", "用户名不能为空");
@@ -126,12 +138,12 @@ public class UserServlet extends BaseServlet {
 
 		String vcode = (String) session.getAttribute("vCode");
 
-		// 1.判断用户名
 		if (verifyCode == null || verifyCode.trim().isEmpty()) {
 			errors.put("verifyCode", "验证码不能为空");
 		} else if (!verifyCode.equalsIgnoreCase(vcode)) {
 			errors.put("verifyCode", "验证码失败");
 		}
+
 		return errors;
 	}
 
@@ -139,27 +151,31 @@ public class UserServlet extends BaseServlet {
 	 * 登陆校验
 	 * 
 	 * @param formUser
-	 * @return
+	 * @return login_errors 登陆时的错误消息
 	 */
 	private Map<String, String> validateLogin(User formUser, HttpSession session) {
+
 		Map<String, String> login_errors = new HashedMap();
+
 		String loginname = formUser.getLoginname();
+
 		// 1.判断用户名
 		if (loginname == null || loginname.trim().isEmpty()) {
 			login_errors.put("loginname", "用户名不能为空");
 		} else if (loginname.length() < 3 || loginname.length() > 20) {
 			login_errors.put("loginname", "用户名长度必须在3到20之间");
 		}
-		// 2.登陆密码
+
+		// 2.登陆密码校验
 		String loginpass = formUser.getLoginpass();
-		// 1.判断用户名
+
 		if (loginpass == null || loginpass.trim().isEmpty()) {
 			login_errors.put("loginpass", "密码不能为空");
 		} else if (loginname.length() < 3 || loginname.length() > 20) {
 			login_errors.put("loginpass", "密码长度必须在3到20之间");
 		}
 
-		// 5.验证码 校验
+		// 3.验证码校验
 		String verifyCode = formUser.getVerifyCode();
 
 		String vcode = (String) session.getAttribute("vCode");
@@ -169,42 +185,44 @@ public class UserServlet extends BaseServlet {
 		} else if (!verifyCode.equalsIgnoreCase(vcode)) {
 			login_errors.put("verifyCode", "验证码失败");
 		}
+
 		return login_errors;
 	}
-	
+
 	/**
-	 * 登陆校验
+	 * 修改密码时的校验
 	 * 
 	 * @param formUser
-	 * @return
+	 * @return password_errors
 	 */
-	private Map<String, String> validatePassword(User formUser, HttpSession session) {
+	private Map<String, String> validatePassword(User formUser,
+			HttpSession session) {
+
 		Map<String, String> password_errors = new HashedMap();
+
 		String loginname = formUser.getLoginname();
-		// 1.判断用户名
 		if (loginname == null || loginname.trim().isEmpty()) {
 			password_errors.put("loginname", "用户名不能为空");
 		} else if (loginname.length() < 3 || loginname.length() > 20) {
 			password_errors.put("loginname", "用户名长度必须在3到20之间");
 		}
+
 		// 2.登陆密码
 		String loginpass = formUser.getLoginpass();
-		// 1.判断用户名
 		if (loginpass == null || loginpass.trim().isEmpty()) {
 			password_errors.put("loginpass", "密码不能为空");
 		} else if (loginname.length() < 3 || loginname.length() > 20) {
 			password_errors.put("loginpass", "密码长度必须在3到20之间");
 		}
-		// 2.登陆密码
-				String newloginpass = formUser.getNewloginpass() ;
-				// 1.判断用户名
-				if (newloginpass == null || newloginpass.trim().isEmpty()) {
-					password_errors.put("loginpass", "密码不能为空");
-				} else if (newloginpass.length() < 3 || loginname.length() > 20) {
-					password_errors.put("loginpass", "密码长度必须在3到20之间");
-				}else if(newloginpass.equals(formUser.getLoginpass())){
-					password_errors.put("loginpass", "请重新修改密码 ");
-				}
+
+		String newloginpass = formUser.getNewloginpass();
+		if (newloginpass == null || newloginpass.trim().isEmpty()) {
+			password_errors.put("reloginpass", "密码不能为空");
+		} else if (newloginpass.length() < 3 || loginname.length() > 20) {
+			password_errors.put("reloginpass", "密码长度必须在3到20之间");
+		} else if (newloginpass.equals(formUser.getLoginpass())) {
+			password_errors.put("reloginpass", "请使用新的密码");
+		}
 		// 5.验证码 校验
 		String verifyCode = formUser.getVerifyCode();
 
@@ -219,7 +237,7 @@ public class UserServlet extends BaseServlet {
 	}
 
 	/**
-	 * 用户名注册
+	 * 验证用户是否注册过
 	 * 
 	 * @param req
 	 * @param resp
@@ -229,10 +247,14 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String ajaxValidateLoginname(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
+
 		// 获取用户名
 		String loginname = req.getParameter("loginname");
+
 		boolean flag = userService.ajaxValidateLoginname(loginname);
+
 		resp.getWriter().print(flag);
+
 		return null;
 
 	}
@@ -248,9 +270,13 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String ajaxValidateEmail(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
+
 		String email = req.getParameter("email");
+
 		boolean flag = userService.ajaxValidateEmail(email);
+
 		resp.getWriter().print(flag);
+
 		return null;
 
 	}
@@ -266,16 +292,20 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String ajaxValidateVerifyCode(HttpServletRequest req,
 			HttpServletResponse resp) throws ServletException, IOException {
+
 		String verificationCode = req.getParameter("VerificationCode");
+
 		String vcode = (String) req.getSession().getAttribute("vCode");
+
 		boolean flag = verificationCode.equalsIgnoreCase(vcode);
+
 		resp.getWriter().print(flag);
-		// return "f:/jsps/msg.jsp";
+
 		return null;
 	}
 
 	/**
-	 * 发送邮箱
+	 * 发送邮箱 激活用户
 	 * 
 	 * @param req
 	 * @param resp
@@ -285,21 +315,37 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String activation(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("activation");
-		String code = req.getParameter("activationCode");
+
+		String activationCode = req.getParameter("activationCode"); // 激活码
+
 		try {
-			userService.activation(code);
+			userService.activation(activationCode);
+
 			req.setAttribute("code", "success");
+
 			req.setAttribute("msg", "恭喜激活成功");
+
 		} catch (UserException e) {
-			// 出错
+
 			req.setAttribute("msg", e.getMessage());
-			req.setAttribute("code", "error"); // 图标
+
+			req.setAttribute("code", "error");
+
 			e.printStackTrace();
 		}
+
 		return "f:/jsps/msg.jsp";
 	}
 
+	/**
+	 * 登陆功能
+	 * 
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public String login(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
@@ -309,7 +355,6 @@ public class UserServlet extends BaseServlet {
 		 * 转发到login.jsp 成功 保存user到session cookie 中文编码处理
 		 */
 
-		System.out.println("login");
 		// 封装数据
 		Map<String, String> userMap = new HashMap<String, String>();
 		String loginname = req.getParameter("loginName");
@@ -326,72 +371,97 @@ public class UserServlet extends BaseServlet {
 		// 校验数据的合理性
 		Map<String, String> loginerrors = validateLogin(formUser,
 				req.getSession());
-		 
+		// 表单数据验证
 		if (loginerrors.size() > 0) {
+
 			req.setAttribute("user", formUser);
+
 			req.setAttribute("loginerrors", loginerrors);
+
 			return "f:/jsps/user/login.jsp";
 		}
 
 		User user = userService.login(formUser);
 		// 判断
 		if (user == null) {
+
 			req.setAttribute("msg", "用户名或密码错误！");
 			req.setAttribute("user", formUser);
 			return "f:jsps/user/login.jsp";
+
 		} else if (!user.isStatus()) {
+
 			req.setAttribute("msg", "您还没有激活！");
 			req.setAttribute("user", formUser);
 			return "f:jsps/user/login.jsp";
-		} else {
-			req.getSession().setAttribute("sessionUser", user);
 
-			String loginName = user.getLoginname();
-			//防止中文乱码。
-			loginName = URLEncoder.encode(loginName, "utf-8");
+		} else {
+
+			req.getSession().setAttribute("sessionUser", user); // 保存到session中
+
+			String loginName = user.getLoginname(); // 获取用户名
+
+			loginName = URLEncoder.encode(loginName, "utf-8"); // 防止中文乱码。
 
 			Cookie cookie = new Cookie("loginName", loginName);
-			cookie.setMaxAge(1000 * 60 * 60 * 24 * 10);
+
+			cookie.setMaxAge(10 * 60 * 60 * 24 * 10);
+
 			resp.addCookie(cookie);
-			
+
 			return "r:/index.jsp";
 		}
 
 	}
+
 	/**
-	 * 修改密码  必须修改
+	 * 修改密码 功能有待完善
+	 * 
 	 * @param req
 	 * @param resp
 	 * @return
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public String updatePassWord(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		//1.封装表单数据
-		 User formUser = CommonUtils.toBean(req.getParameterMap(), User.class) ;
-		//2.验证表单数据 
-		 User user = (User)req.getSession().getAttribute("sessionUser") ;
-		 //如果用户没有登录 返回登陆页面 显示错误消息 
-		 if(user == null){ //鸡肋功能
-			 req.setAttribute("msg", "您还没有登录") ;
-			 return "f:/jsps/user/login.jsp" ;
-		 }
-		 //3.数据库验证
-		 try {
-			userService.updatePassword(user.getUid(), formUser.getNewloginpass(), formUser.getLoginpass()) ;
-			req.setAttribute("msg", "修改密码成功") ;
-			req.setAttribute("code","success") ;
-			return "f:/jsps/msg.jsp" ;
-		 } catch (UserException e) {
-			 req.setAttribute("msg", e.getMessage()) ;
-			 req.setAttribute("form","formUser") ;
-			 //修改密码页面
-			 return "f:/jsps/user/pwd.jsp" ;
+	public String updatePassWord(HttpServletRequest req,
+			HttpServletResponse resp) throws ServletException, IOException {
+		// 1.封装表单数据
+		User formUser = CommonUtils.toBean(req.getParameterMap(), User.class);
+		// 2.验证表单数据
+		User user = (User) req.getSession().getAttribute("sessionUser");
+		// 如果用户没有登录 返回登陆页面 显示错误消息
+
+		if (user == null) { // 鸡肋功能
+
+			req.setAttribute("msg", "您还没有登录");
+
+			return "f:/jsps/user/login.jsp";
+		}
+		// 3.数据库验证
+		try {
+
+			userService.updatePassword(user.getLoginname(),
+					formUser.getNewloginpass(), formUser.getLoginpass());
+
+			req.setAttribute("msg", "修改密码成功");
+
+			req.setAttribute("code", "success");
+
+			return "f:/jsps/msg.jsp";
+
+		} catch (UserException e) {
+
+			req.setAttribute("msg", e.getMessage());
+
+			req.setAttribute("form", "formUser");
+
+			return "f:/jsps/user/pwd.jsp"; // 修改密码页面
 		}
 	}
+
 	/**
 	 * 退出功能
+	 * 
 	 * @param req
 	 * @param resp
 	 * @return
@@ -400,7 +470,9 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String quit(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getSession().invalidate() ;
-		return "r:/jsps/user/login.jsp"; 
+
+		req.getSession().invalidate();
+
+		return "r:/jsps/user/login.jsp";
 	}
 }

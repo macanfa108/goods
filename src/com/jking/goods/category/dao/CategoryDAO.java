@@ -24,16 +24,27 @@ public class CategoryDAO {
 	 * @return
 	 */
 	private Category toCategory(Map<String, Object> mp) {
-		Category category = CommonUtils.toBean(mp, Category.class);
-		String pid = (String) mp.get("pid");
-		if (pid != null) {
+		
+		Category category = CommonUtils.toBean(mp, Category.class);  //使用工具类将map转换为bean
+		
+		String pid = (String) mp.get("pid");  //判断pid 是否为一级分类
+		
+		if (pid != null) {    //不为一级分类
+			
 			Category cate = new Category();
-			cate.setCid(pid);
-			category.setParent(cate);
+			
+			cate.setCid(pid);   //设置pid
+			
+			category.setParent(cate);  //设置上一级目录
 		}
+		
 		return category;
 	}
-
+	/**
+	 *  将List<Map<String, Object>>转化为List<Category>
+	 * @param mp   List<Map<String, Object>>
+	 * @return  List<Category> 
+	 */
 	public List<Category> toCategoryList(List<Map<String, Object>> mp) {
 
 		List<Category> categoryList = new ArrayList<Category>();
@@ -73,7 +84,12 @@ public class CategoryDAO {
 
 		return parents;
 	}
-
+	/**
+	 * 根据pid查询出子分类的数据
+	 * @param pid 父分类的id
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Category> findByParent(String pid) throws SQLException {
 
 		String sql = "SELECT * FROM t_category WHERE pid = ?";

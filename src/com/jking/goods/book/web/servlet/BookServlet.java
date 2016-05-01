@@ -12,45 +12,55 @@ import com.jking.goods.pager.PageBean;
 import cn.itcast.servlet.BaseServlet;
 
 public class BookServlet extends BaseServlet {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private BookService bookService = new BookService() ;
-	 /**
+	
+	/**
 	  * 获取参数pc 第几页
 	  * @param req
 	  * @return
 	  */
 	private int getPc(HttpServletRequest req){
-		int pc = 1 ;
+		
+		int pc = 1 ;  //初始化 默认显示第一页
+		
 		String param = req.getParameter("pc") ;
 		
 		if(param!= null && !param.trim().isEmpty()){
 			try{
-				pc = Integer.parseInt(param) ;
+				 pc = Integer.parseInt(param) ;    //转化 
 			}catch(RuntimeException e){
 				pc = 1 ;
 			}
 		}
 		return pc ;
-		
 	}
 	/**
-	 *  截取url
+	 *  截取url 
 	 * @param req
 	 * @return
 	 */
 	private String getUrl(HttpServletRequest req){
-		String url = req.getRequestURI() + "?" + req.getQueryString();  
+
 		
-		int index = url.indexOf("&pc=") ;
+		String url = req.getRequestURI() + "?" +  req.getQueryString();   //获得完整的url 
+		
+		int index = url.indexOf("&pc=") ; 
+		
 		if(index != -1 ){
+		
 			url = url.substring(0,index) ;
 		}
+		 
 		return url ;
 	}
 	
 	public String findByCategory(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		int pc = getPc(req) ;
+		int pc = getPc(req) ;    //获取显示的第几页
 		
 		String url = getUrl(req) ;
 		
@@ -60,7 +70,31 @@ public class BookServlet extends BaseServlet {
 		
 		pb.setUrl(url) ;
 		
-		req.setAttribute("pb", pb) ;
+		req.setAttribute("pb", pb) ;    //保存到request的书本信息
+		
+		return "f:/jsps/book/list.jsp" ;
+ 		 
+	}
+	/**
+	 * 查询所有的图书
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String findAllBooks(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		int pc = getPc(req) ;    //获取显示的第几页
+		
+		String url = getUrl(req) ;
+		
+		PageBean<Book> pb = bookService.findAllBooks(pc) ;
+		
+		pb.setUrl(url) ;
+		
+		req.setAttribute("pb", pb) ;    //保存到request的书本信息
 		
 		return "f:/jsps/book/list.jsp" ;
  		 

@@ -27,8 +27,6 @@
 	href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/jsps/css/user/regist.css">
-
-
 </head>
 
 <body>
@@ -40,11 +38,9 @@
 				<div class="panel-heading text-success">用户注册</div>
 				<!--主体-->
 				<div class="panel-body">
-				
 					<form class="form-horizontal" method="post" action="<c:url value='/UserServlet' />" id="registForm">
 					<!-- 发送参数的隐藏的input -->
 					<input type="hidden" name="method" value="regist">
-					
 						<!--用户名输入-->
 						<div class="form-group">
 							<label for="loginName" class="col-sm-2 control-label">用户名：</label>
@@ -139,10 +135,8 @@
 								<button type="submit" class="btn btn-success btn-block">注册</button>
 							</div>
 						</div>
-					</form>
-					
-				</div>
-				
+					</form>		
+				</div>			
 			</div>
 		</div>
 		<!--registBox-->
