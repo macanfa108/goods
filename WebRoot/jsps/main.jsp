@@ -45,6 +45,7 @@
 		<!-- 图书内容展示区 -->
 
 	</div>
+	
 	<div class='height_20'></div>
 	<!-- 产品展示区 -->
 	<div class='container'>
@@ -54,7 +55,8 @@
  
 		 
 	<!-- 底部展示区 -->
-			<jsp:include page='footer.jsp' />
+	
+	<jsp:include page='footer.jsp' />
 
  
 	<script src='<%=path %>/vendor/bootstrap/js/bootstrap.min.js'></script>

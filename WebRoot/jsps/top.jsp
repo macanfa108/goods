@@ -47,13 +47,13 @@ href="<%=path%>/vendor/bootstrap/css/bootstrap.min.css" /> --%>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav  navbar-right">
-						<li><a href="<%=path%>/jsps/user/login.jsp"><span
-								class='glyphicon glyphicon-shopping-cart'></span>我的购物车 </a>
+						<li><a href="<%=path%>/jsps/cart/cartlist.jsp"  target='body'><span
+								class='glyphicon glyphicon-shopping-cart' ></span>我的购物车 </a>
 						</li>
-						<li><a href="<%=path%>/jsps/user/regist.jsp"><span
+						<li><a href="<%=path%>/jsps/order/list.jsp"  target='body'><span
 								class="glyphicon glyphicon-list-alt"></span> 我的订单</a>
 						</li>
-						<li><a href="<%=path%>/jsps/user/regist.jsp"><span
+						<li><a href="<%=path%>/jsps/user/regist.jsp"  target='body'><span
 								class='glyphicon glyphicon-pencil'></span> 修改密码</a>
 						</li>
 						<li><a href="<%=path%>/UserServlet?method=quit"><span
